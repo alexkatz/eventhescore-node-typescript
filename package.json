@@ -1,0 +1,11 @@
+{
+  "name": "eventhescore-node",
+  "version": "1.0.0",
+  "description": "A simple app for keeping scores of games!",
+  "main": "src/server.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.4.2",
+    "webpack": "^3.4.1"
+  }
+}
