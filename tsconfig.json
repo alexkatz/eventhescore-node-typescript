@@ -5,7 +5,6 @@
                 "name": "tslint-language-service"
             }
         ],
-        "noUnusedLocals": true,
         "target": "es5",
         "removeComments": true
     },

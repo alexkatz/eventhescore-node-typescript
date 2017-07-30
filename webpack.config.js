@@ -31,6 +31,17 @@ module.exports = {
                 test: /\.(ts|js)/,
                 use: 'awesome-typescript-loader',
             },
+            {
+                test: /\.ts/,
+                enforce: 'pre',
+                loader: 'tslint-loader',
+                options: {
+                    configFile: 'tslint.json',
+                    tsConfigFile: 'tsconfig.json',
+                    typeCheck: true,
+                    formatter: 'stylish',
+                },
+            },
         ],
     },
     plugins: [
