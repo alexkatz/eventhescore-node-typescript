@@ -1,0 +1,1 @@
+CREATE TYPE int_table AS (id integer);
