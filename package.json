@@ -9,11 +9,12 @@
     "publish": "webpack --production",
     "clean": "rm -r dist",
     "lint-fix": "tslint -c tslint.json -p tsconfig.json --type-check  --fix",
-    "lint": "tslint -c tslint.json -p tsconfig.json --type-check --format stylish" 
+    "lint": "tslint -c tslint.json -p tsconfig.json --type-check --format stylish"
   },
   "devDependencies": {
     "@types/hapi": "^16.1.7",
     "awesome-typescript-loader": "^3.2.2",
+    "babel-core": "^6.25.0",
     "tslint": "^5.5.0",
     "tslint-loader": "^3.5.3",
     "typescript": "^2.4.2",

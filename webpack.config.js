@@ -20,7 +20,7 @@ module.exports = {
     },
     target: 'node',
     resolve: {
-        extensions: ['.ts'],
+        extensions: ['.ts', '.js'],
         // Fix webpack's default behavior to not load packages with jsnext:main module
         // https://github.com/Microsoft/TypeScript/issues/11677
         mainFields: ['main'],
@@ -28,17 +28,8 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.ts/,
+                test: /\.(ts|js)/,
                 use: 'awesome-typescript-loader',
-            },
-            {
-                test: /\.ts/,
-                enforce: 'pre',
-                loader: 'tslint-loader',
-                options: {
-                    configFile: 'tslint.json',
-                    tsConfigFile: 'tsconfig.json',
-                },
             },
         ],
     },

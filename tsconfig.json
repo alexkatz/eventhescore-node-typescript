@@ -5,12 +5,19 @@
                 "name": "tslint-language-service"
             }
         ],
+        "noUnusedLocals": true,
         "target": "es5",
-        "lib": [
-            "es7"
-        ],
-        "include": [
-            "src/**/*.ts"
-        ]
+        "removeComments": true
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        "useBabel": true,
+        "useCache": true,
+        "useTranspileModule": true
     }
 }

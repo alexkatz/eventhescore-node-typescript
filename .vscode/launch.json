@@ -10,7 +10,6 @@
             "name": "Launch Program",
             "program": "${workspaceRoot}/src/server.ts",
             "cwd": "${workspaceRoot}/src",
-            "preLaunchTask": "build",
             "outFiles": [
                 "${workspaceRoot}/dist/**/*.js"
             ]
