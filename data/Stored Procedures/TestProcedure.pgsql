@@ -1,4 +1,3 @@
-CREATE OR REPLACE FUNCTION testProcedure()) RETURNS VARCHAR(128) AS $$
-    SELECT 'Hello, world!'
-    END
-    $$ LANGUAGE plpgsql;
+CREATE FUNCTION dbo.testprocedure() RETURNS TABLE(name character varying) AS $$            
+  SELECT GameName FROM dbo.Game;        
+$$ LANGUAGE sql;
