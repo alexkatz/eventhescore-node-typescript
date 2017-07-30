@@ -5,8 +5,10 @@
                 "name": "tslint-language-service"
             }
         ],
+        "moduleResolution": "node",
         "target": "es5",
         "removeComments": true,
+        "skipDefaultLibCheck": true,
         "lib": [
             "es7"
         ]
@@ -15,7 +17,7 @@
         "src/**/*.ts"
     ],
     "exclude": [
-        "node_modules/"
+        "node_modules"
     ],
     "awesomeTypescriptLoaderOptions": {
         "useBabel": true,

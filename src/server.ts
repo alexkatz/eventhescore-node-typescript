@@ -1,5 +1,5 @@
 import * as Hapi from 'hapi';
-import * as PG from 'pg';
+import { Client } from 'pg';
 
 const server = new Hapi.Server();
 
@@ -9,16 +9,19 @@ server.route({
     method: 'GET',
     path: '/',
     async handler(request, reply): Promise<void> {
-        const pool = new PG.Pool({
-            user: 'admin',
-            host: 'localhost',
-            database: 'eventhescore',
-            password: 'admin',
-            port: 5432,
-        });
-        const { rows } = await pool.query('SELECT * FROM dbo.TestProcedure()');
-        
-        reply(rows);
+        try {
+            const client = new Client({
+                user: 'admin',
+                host: 'localhost',
+                database: 'eventhescore',
+                password: 'admin',
+                port: 5432,
+            });
+            const { rows } = await client.query('SELECT * FROM dbo.TestProcedure()');
+            reply(rows);
+        } catch (error) {
+            console.log(error);
+        }
     },
 });
 
@@ -32,8 +35,6 @@ server.route({
 });
 
 server.start(err => {
-    if (err) {
-        throw err;
-    }
+    if (err) { throw err; }
     console.log(`Server running at: ${server.info.uri}`);
 });
