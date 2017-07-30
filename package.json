@@ -5,22 +5,19 @@
   "main": "src/server.ts",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
-    "publish": "webpack --production",
-    "clean": "rm -r dist",
-    "lint-fix": "tslint -c tslint.json -p tsconfig.json --type-check  --fix",
-    "lint": "tslint -c tslint.json -p tsconfig.json --type-check --format stylish",
-    "watch": "webpack --watch"
+    "build": "tsc --project tsconfig.json",
+    "clear": "rm -r dist",
+    "lint-fix": "tslint -c tslint.json -p tsconfig.json --type-check --fix",
+    "lint": "tslint -c tslint.json -p tsconfig.json --type-check --format codeFrame --force",
+    "watch": "tsc-watch --project tsconfig.json --onSuccess \"yarn lint\""
   },
   "devDependencies": {
     "@types/hapi": "^16.1.7",
     "@types/pg": "^6.1.43",
-    "awesome-typescript-loader": "^3.2.2",
-    "babel-core": "^6.25.0",
+    "tsc": "^1.20150623.0",
+    "tsc-watch": "^1.0.7",
     "tslint": "^5.5.0",
-    "tslint-loader": "^3.5.3",
-    "typescript": "^2.4.2",
-    "webpack": "^3.4.1"
+    "typescript": "^2.4.2"
   },
   "dependencies": {
     "hapi": "^16.5.0",

@@ -1,16 +1,20 @@
 {
     "compilerOptions": {
+        "outDir": "dist",
+        "inlineSourceMap": true,
+        "pretty": true,
+        "moduleResolution": "node",
+        "target": "es6",
+        "module": "commonjs",
+        "skipLibCheck": true,
+        "removeComments": true,
+        "lib": [
+            "es7"
+        ],
         "plugins": [
             {
                 "name": "tslint-language-service"
             }
-        ],
-        "moduleResolution": "node",
-        "target": "es5",
-        "removeComments": true,
-        "skipDefaultLibCheck": true,
-        "lib": [
-            "es7"
         ]
     },
     "include": [
@@ -18,10 +22,5 @@
     ],
     "exclude": [
         "node_modules"
-    ],
-    "awesomeTypescriptLoaderOptions": {
-        "useBabel": true,
-        "useCache": true,
-        "useTranspileModule": true
-    }
+    ]
 }

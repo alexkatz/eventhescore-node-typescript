@@ -17,10 +17,12 @@ server.route({
                 password: 'admin',
                 port: 5432,
             });
+            await client.connect();
             const { rows } = await client.query('SELECT * FROM dbo.TestProcedure()');
             reply(rows);
         } catch (error) {
             console.log(error);
+            reply();
         }
     },
 });
