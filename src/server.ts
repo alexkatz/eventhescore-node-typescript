@@ -1,5 +1,5 @@
 import * as Hapi from 'hapi';
-import { Client } from 'pg';
+import { Pool } from 'pg';
 
 const server = new Hapi.Server();
 
@@ -10,15 +10,14 @@ server.route({
     path: '/',
     async handler(request, reply): Promise<void> {
         try {
-            const client = new Client({
+            const pool = new Pool({
                 user: 'admin',
                 host: 'localhost',
                 database: 'eventhescore',
                 password: 'admin',
                 port: 5432,
             });
-            await client.connect();
-            const { rows } = await client.query('SELECT * FROM dbo.TestProcedure()');
+            const { rows } = await pool.query('SELECT * FROM dbo.TestProcedure()');
             reply(rows);
         } catch (error) {
             console.log(error);

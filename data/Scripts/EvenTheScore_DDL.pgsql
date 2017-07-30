@@ -1,3 +1,5 @@
+SET search_path TO dbo;
+
 -- Drop statements to reset db --
 
 DROP TABLE Game;
