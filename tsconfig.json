@@ -6,13 +6,16 @@
             }
         ],
         "target": "es5",
-        "removeComments": true
+        "removeComments": true,
+        "lib": [
+            "es7"
+        ]
     },
     "include": [
         "src/**/*.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules/"
     ],
     "awesomeTypescriptLoaderOptions": {
         "useBabel": true,
