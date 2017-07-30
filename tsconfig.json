@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "plugins": [
+            {
+                "name": "tslint-language-service"
+            }
+        ],
+        "target": "es5",
+        "lib": [
+            "es7"
+        ],
+        "include": [
+            "src/**/*.ts"
+        ]
+    }
+}
