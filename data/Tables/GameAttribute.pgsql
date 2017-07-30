@@ -1,0 +1,1 @@
+CREATE TABLE GameAttribute (GameId int NOT NULL, AttributeName VARCHAR(128) NOT NULL, AttributeValue VARCHAR(500), CONSTRAINT PK_GameAttribute_GameId_AttributeName PRIMARY KEY (GameId, AttributeName));
