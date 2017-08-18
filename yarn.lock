@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@types/boom@*":
+"@types/boom@*", "@types/boom@^4.3.5":
   version "4.3.5"
   resolved "https://registry.yarnpkg.com/@types/boom/-/boom-4.3.5.tgz#9ccca31e08c989bce483bd76b2de798526c608f5"
 
@@ -12,7 +12,7 @@
   dependencies:
     "@types/boom" "*"
 
-"@types/hapi@^16.1.7":
+"@types/hapi@*", "@types/hapi@^16.1.7":
   version "16.1.7"
   resolved "https://registry.yarnpkg.com/@types/hapi/-/hapi-16.1.7.tgz#2e0c1833d1d9e12255cca778172f9365c6040cc3"
   dependencies:
@@ -23,6 +23,12 @@
     "@types/node" "*"
     "@types/podium" "*"
     "@types/shot" "*"
+
+"@types/inert@^4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@types/inert/-/inert-4.2.2.tgz#82cc249f95b7336a8ec8f9c94918911f9360adc2"
+  dependencies:
+    "@types/hapi" "*"
 
 "@types/joi@*":
   version "10.4.0"
@@ -107,7 +113,7 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-boom@5.x.x:
+boom@5.x.x, boom@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/boom/-/boom-5.2.0.tgz#5dd9da6ee3a5f302077436290cb717d3f4a54e02"
   dependencies:
@@ -234,6 +240,10 @@ glob@^7.1.1:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
+hapi-require-https@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/hapi-require-https/-/hapi-require-https-2.1.0.tgz#440e364cd42e979e02df05e91adfd9da03b4aa72"
+
 hapi@^16.5.0:
   version "16.5.0"
   resolved "https://registry.yarnpkg.com/hapi/-/hapi-16.5.0.tgz#89e4770f0034e3b69ee99ed929cc5b573805f303"
@@ -274,6 +284,17 @@ heavy@4.x.x:
 hoek@4.x.x:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.0.tgz#72d9d0754f7fe25ca2d01ad8f8f9a9449a89526d"
+
+inert@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/inert/-/inert-4.2.1.tgz#da743c478a18a8378032f80ada128a28cd2bba93"
+  dependencies:
+    ammo "2.x.x"
+    boom "5.x.x"
+    hoek "4.x.x"
+    items "2.x.x"
+    joi "10.x.x"
+    lru-cache "4.1.x"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -319,7 +340,7 @@ js-tokens@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-lru-cache@^4.0.1:
+lru-cache@4.1.x, lru-cache@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.1.tgz#622e32e82488b49279114a4f9ecf45e7cd6bba55"
   dependencies:

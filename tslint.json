@@ -13,6 +13,9 @@
       "named": "never",
       "asyncArrow": "always"
     }],
+    "interface-name": [
+      false
+    ],
     "max-line-length": [false],
     "no-console": [false],
     "no-default-export": true,
