@@ -1,1 +1,0 @@
-CREATE TABLE Player (PlayerId SERIAL, PlayerName VARCHAR(128) NOT NULL, Email VARCHAR(128) NOT NULL, ProfilePicUrl VARCHAR(500), Nickname VARCHAR(128), CONSTRAINT UK_Player_Email UNIQUE (Email));

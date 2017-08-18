@@ -7,9 +7,9 @@ DROP TABLE GameSet;
 DROP TABLE GameType;
 DROP TABLE GameTypeConfig;
 DROP TABLE GameAttribute;
-DROP TABLE Player;
-DROP TABLE Game_Player_Join;
-DROP TABLE PlayerHighScore;
+DROP TABLE User;
+DROP TABLE Game_User_Join;
+DROP TABLE UserHighScore;
 
 
 
@@ -20,9 +20,9 @@ CREATE TABLE GameSet (GameSetId SERIAL, GameTypeId INT NOT NULL, GameSetName VAR
 CREATE TABLE GameType (GameTypeId int NOT NULL, GameTypeName VARCHAR(128), CONSTRAINT PK_GameType_GameTypeId PRIMARY KEY (GameTypeId));
 CREATE TABLE GameTypeConfig (GameTypeId int NOT NULL, AttributeName VARCHAR(128) NOT NULL, CONSTRAINT PK_GameTypeConfig_GameTypeId_AttributeName PRIMARY KEY (GameTypeId, AttributeName));
 CREATE TABLE GameAttribute (GameId int NOT NULL, AttributeName VARCHAR(128) NOT NULL, AttributeValue VARCHAR(500), CONSTRAINT PK_GameAttribute_GameId_AttributeName PRIMARY KEY (GameId, AttributeName));
-CREATE TABLE Player (PlayerId SERIAL, PlayerName VARCHAR(128) NOT NULL, Email VARCHAR(128) NOT NULL, ProfilePicUrl VARCHAR(500), Nickname VARCHAR(128), CONSTRAINT UK_Player_Email UNIQUE (Email));
-CREATE TABLE Game_Player_Join (GameId int NOT NULL, PlayerId int NOT NULL, Score float, Rank int, CONSTRAINT PK_Game_Player_Join_GameId_PlayerId PRIMARY KEY (GameId, PlayerId));
-CREATE TABLE PlayerHighScore (PlayerId int NOT NULL, GameTypeId int NOT NULL, HighScore float, CONSTRAINT PK_PlayerHighScore_PlayerId_GameTypeId PRIMARY KEY (PlayerId, GameTypeId));
+CREATE TABLE User (UserId SERIAL, UserName VARCHAR(128) NOT NULL, Email VARCHAR(128) NOT NULL, ProfilePicUrl VARCHAR(500), Nickname VARCHAR(128), CONSTRAINT UK_User_Email UNIQUE (Email));
+CREATE TABLE Game_User_Join (GameId int NOT NULL, UserId int NOT NULL, Score float, Rank int, CONSTRAINT PK_Game_User_Join_GameId_UserId PRIMARY KEY (GameId, UserId));
+CREATE TABLE UserHighScore (UserId int NOT NULL, GameTypeId int NOT NULL, HighScore float, CONSTRAINT PK_UserHighScore_UserId_GameTypeId PRIMARY KEY (UserId, GameTypeId));
 
 -- INSERT mock data
 
@@ -36,26 +36,26 @@ INSERT INTO Game(GameTypeId, GameSetId, GameName, StartDt) VALUES (1, 1, 'Ethan 
 
 INSERT INTO GameAttribute(GameId, AttributeName, AttributeValue) VALUES (1, 'SolidScratchCount', '3'), (1, 'StripeScratchCount', '1'), (1, 'WinningColor', 'Solids');
 
-INSERT INTO Player(PlayerName, Email, Nickname) VALUES ('Ethan DuBois', 'dubois90@gmail.com', 'slappony94'), ('Alex Katz', 'alexanderikatz@gmail.com', 'mrdawglecakez31');
+INSERT INTO User(UserName, Email, Nickname) VALUES ('Ethan DuBois', 'dubois90@gmail.com', 'slappony94'), ('Alex Katz', 'alexanderikatz@gmail.com', 'mrdawglecakez31');
 
-INSERT INTO Game_Player_Join(GameId, PlayerId, Score, Rank) VALUES (1, 1, 1, 1), (1, 2, 0, 2);
+INSERT INTO Game_User_Join(GameId, UserId, Score, Rank) VALUES (1, 1, 1, 1), (1, 2, 0, 2);
 
-INSERT INTO PlayerHighScore(PlayerId, GameTypeId, HighScore) VALUES (1, 1, 1), (2, 1, 0);
+INSERT INTO UserHighScore(UserId, GameTypeId, HighScore) VALUES (1, 1, 1), (2, 1, 0);
 
 -- Test queries
 
-SELECT g.GameId, gs.GameSetName, g.GameName, gt.GameTypeName, p.PlayerName, p.Nickname, phs.HighScore, ga.AttributeName, ga.AttributeValue
+SELECT g.GameId, gs.GameSetName, g.GameName, gt.GameTypeName, p.UserName, p.Nickname, phs.HighScore, ga.AttributeName, ga.AttributeValue
 FROM Game g
     INNER JOIN GameType gt
         ON g.GameTypeId = gt.GameTypeId
     INNER JOIN GameSet gs
         ON g.GameSetId = gs.GameSetId
-    INNER JOIN Game_Player_Join gpj
+    INNER JOIN Game_User_Join gpj
         ON g.GameId = gpj.GameId
-    INNER JOIN Player p 
-        ON gpj.PlayerId = p.PlayerId
-    INNER JOIN PlayerHighScore phs
-        ON p.PlayerId = phs.PlayerId
+    INNER JOIN User p 
+        ON gpj.UserId = p.UserId
+    INNER JOIN UserHighScore phs
+        ON p.UserId = phs.UserId
             AND g.GameTypeId = phs.GameTypeId
     INNER JOIN GameTypeConfig gtc 
         ON gt.GameTypeId = gtc.GameTypeId 

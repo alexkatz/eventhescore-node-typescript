@@ -10,8 +10,8 @@ INSERT INTO Game(GameTypeId, GameSetId, GameName, StartDt) VALUES (1, 1, 'Ethan 
 
 INSERT INTO GameAttribute(GameId, AttributeName, AttributeValue) VALUES (1, 'SolidScratchCount', '3'), (1, 'StripeScratchCount', '1'), (1, 'WinningColor', 'Solids');
 
-INSERT INTO Player(PlayerName, Email, Nickname) VALUES ('Ethan DuBois', 'dubois90@gmail.com', 'slappony94'), ('Alex Katz', 'alexanderikatz@gmail.com', 'mrdawglecakez31');
+INSERT INTO User(UserName, Email, Nickname) VALUES ('Ethan DuBois', 'dubois90@gmail.com', 'slappony94'), ('Alex Katz', 'alexanderikatz@gmail.com', 'mrdawglecakez31');
 
-INSERT INTO Game_Player_Join(GameId, PlayerId, Score, Rank) VALUES (1, 1, 1, 1), (1, 2, 0, 2);
+INSERT INTO Game_User_Join(GameId, UserId, Score, Rank) VALUES (1, 1, 1, 1), (1, 2, 0, 2);
 
-INSERT INTO PlayerHighScore(PlayerId, GameTypeId, HighScore) VALUES (1, 1, 1), (2, 1, 0);
+INSERT INTO UserHighScore(UserId, GameTypeId, HighScore) VALUES (1, 1, 1), (2, 1, 0);
