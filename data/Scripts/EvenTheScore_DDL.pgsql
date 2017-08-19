@@ -2,14 +2,14 @@ SET search_path TO dbo;
 
 -- Drop statements to reset db --
 
-DROP TABLE Game;
-DROP TABLE GameSet;
-DROP TABLE GameType;
-DROP TABLE GameTypeConfig;
-DROP TABLE GameAttribute;
-DROP TABLE User;
-DROP TABLE Game_User_Join;
-DROP TABLE UserHighScore;
+-- DROP TABLE Game;
+-- DROP TABLE GameSet;
+-- DROP TABLE GameType;
+-- DROP TABLE GameTypeConfig;
+-- DROP TABLE GameAttribute;
+-- DROP TABLE User;
+-- DROP TABLE Game_User_Join;
+-- DROP TABLE UserHighScore;
 
 
 
@@ -20,7 +20,7 @@ CREATE TABLE GameSet (GameSetId SERIAL, GameTypeId INT NOT NULL, GameSetName VAR
 CREATE TABLE GameType (GameTypeId int NOT NULL, GameTypeName VARCHAR(128), CONSTRAINT PK_GameType_GameTypeId PRIMARY KEY (GameTypeId));
 CREATE TABLE GameTypeConfig (GameTypeId int NOT NULL, AttributeName VARCHAR(128) NOT NULL, CONSTRAINT PK_GameTypeConfig_GameTypeId_AttributeName PRIMARY KEY (GameTypeId, AttributeName));
 CREATE TABLE GameAttribute (GameId int NOT NULL, AttributeName VARCHAR(128) NOT NULL, AttributeValue VARCHAR(500), CONSTRAINT PK_GameAttribute_GameId_AttributeName PRIMARY KEY (GameId, AttributeName));
-CREATE TABLE User (UserId SERIAL, UserName VARCHAR(128) NOT NULL, Email VARCHAR(128) NOT NULL, ProfilePicUrl VARCHAR(500), Nickname VARCHAR(128), CONSTRAINT UK_User_Email UNIQUE (Email));
+CREATE TABLE ets.User (UserId SERIAL, UserName VARCHAR(128) NOT NULL, Email VARCHAR(128) NOT NULL, ProfilePicUrl VARCHAR(500), Nickname VARCHAR(128), CONSTRAINT UK_User_Email UNIQUE (Email));
 CREATE TABLE Game_User_Join (GameId int NOT NULL, UserId int NOT NULL, Score float, Rank int, CONSTRAINT PK_Game_User_Join_GameId_UserId PRIMARY KEY (GameId, UserId));
 CREATE TABLE UserHighScore (UserId int NOT NULL, GameTypeId int NOT NULL, HighScore float, CONSTRAINT PK_UserHighScore_UserId_GameTypeId PRIMARY KEY (UserId, GameTypeId));
 
@@ -36,7 +36,7 @@ INSERT INTO Game(GameTypeId, GameSetId, GameName, StartDt) VALUES (1, 1, 'Ethan 
 
 INSERT INTO GameAttribute(GameId, AttributeName, AttributeValue) VALUES (1, 'SolidScratchCount', '3'), (1, 'StripeScratchCount', '1'), (1, 'WinningColor', 'Solids');
 
-INSERT INTO User(UserName, Email, Nickname) VALUES ('Ethan DuBois', 'dubois90@gmail.com', 'slappony94'), ('Alex Katz', 'alexanderikatz@gmail.com', 'mrdawglecakez31');
+INSERT INTO ets.User(UserName, Email, Nickname) VALUES ('Ethan DuBois', 'dubois90@gmail.com', 'slappony94'), ('Alex Katz', 'alexanderikatz@gmail.com', 'mrdawglecakez31');
 
 INSERT INTO Game_User_Join(GameId, UserId, Score, Rank) VALUES (1, 1, 1, 1), (1, 2, 0, 2);
 
