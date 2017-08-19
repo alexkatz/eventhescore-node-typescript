@@ -46,7 +46,6 @@ class GoogleLoginButton extends React.Component<GoogleLoginButtonProps> {
             <Button
                 style={{
                     backgroundColor: 'white',
-                    boxShadow: Constants.BoxShadow.NORMAL,
                     border: 'none',
                     padding: 0,
                     cursor: 'pointer',
