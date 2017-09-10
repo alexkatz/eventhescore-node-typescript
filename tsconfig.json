@@ -5,7 +5,7 @@
         "pretty": true,
         "moduleResolution": "node",
         "target": "es6",
-        "module": "commonjs",
+        "module": "umd",
         "skipLibCheck": true,
         "removeComments": true,
         "lib": [
