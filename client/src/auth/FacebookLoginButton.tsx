@@ -3,6 +3,7 @@ import { Constants } from "../shared/constants";
 import { Colors } from "../shared/colors";
 import { Assets } from "../shared/assets";
 import { Button } from "../shared/components/Button";
+import { AuthData } from './models';
 
 declare global {
   interface Window {
@@ -12,7 +13,7 @@ declare global {
 
 interface FacebookLoginButtonProps {
   appId: string;
-  onAuthenticate: (props: Object) => any;
+  onAuthenticate: (props: AuthData) => void;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   style?: React.CSSProperties;
@@ -109,12 +110,14 @@ class FacebookLoginButton extends React.Component<FacebookLoginButtonProps> {
       if (authResponse) {
         FB.api('/me', { fields: 'first_name,last_name,email,picture' }, me => {
           onAuthenticate({
-            ...authResponse,
-            firstName: me.first_name,
-            lastName: me.last_name,
-            email: me.email,
-            platform: Constants.Platform.Facebook,
-            imageUrl: me.picture.data.url,
+            accessToken: authResponse.accessToken,
+            user: {
+              firstName: me.first_name,
+              lastName: me.last_name,
+              email: me.email,
+              authPlatform: Constants.Platform.Facebook,
+              imageUrl: me.picture.data.url,
+            },
           });
         });
       }

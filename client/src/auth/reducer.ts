@@ -1,4 +1,5 @@
 import { AnyAction } from "redux";
+import { User } from "./models";
 
 export interface AuthState {
     user?: User;
@@ -12,6 +13,6 @@ const initialState: AuthState = {
     isRehydrated: false,
 }
 
-export function reducer(state: AuthState = initialState, action: AnyAction): AuthState {
+export const reducer = (state: AuthState = initialState, action: AnyAction): AuthState => {
     return initialState;
 }

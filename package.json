@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --project tsconfig.json",
+    "start-client": "cd client && yarn start",
     "clear": "rm -r dist",
     "lint-fix": "tslint -c tslint.json -p tsconfig.json --type-check --fix",
     "lint": "tslint -c tslint.json -p tsconfig.json --type-check --format codeFrame --force",
@@ -18,7 +19,7 @@
     "@types/pg": "^6.1.43",
     "@types/redux": "^3.6.0",
     "tsc": "^1.20150623.0",
-    "tsc-watch": "^1.0.7",
+    "tsc-watch": "1.0.7",
     "tslint": "^5.5.0",
     "typescript": "^2.4.2"
   },

@@ -2,11 +2,12 @@ import * as React from 'react';
 import { Constants } from '../shared/constants';
 import { Assets } from "../shared/assets";
 import { Button } from "../shared/components/Button";
+import { AuthData } from './models';
 
 const GOOGLE_SIGN_IN_COLOR = 'rgba(0, 0, 0, 0.54)';
 
 interface GoogleLoginButtonProps {
-    onAuthenticate: Function;
+    onAuthenticate: (props: AuthData) => void;
     clientId: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
     disabled?: boolean;
@@ -95,11 +96,13 @@ class GoogleLoginButton extends React.Component<GoogleLoginButtonProps> {
             const basicProfile = res.getBasicProfile();
             onAuthenticate({
                 accessToken: authResponse.access_token,
-                email: basicProfile.getEmail(),
-                firstName: basicProfile.getGivenName(),
-                lastName: basicProfile.getFamilyName(),
-                platform: Constants.Platform.Google,
-                imageUrl: basicProfile.getImageUrl(),
+                user: {
+                    email: basicProfile.getEmail(),
+                    firstName: basicProfile.getGivenName(),
+                    lastName: basicProfile.getFamilyName(),
+                    authPlatform: Constants.Platform.Google,
+                    imageUrl: basicProfile.getImageUrl(),
+                }
             });
         } catch (error) {
             onAuthenticate(error);

@@ -1,11 +1,9 @@
 import * as Hapi from 'hapi';
-import requireHttps from 'hapi-require-https';
 import { api } from './api';
 
 const server = new Hapi.Server();
-server.connection({ port: 3000, host: 'localhost' });
+server.connection({ port: 3000, host: 'localhost', routes: { cors: true } });
 server.register([
-    requireHttps,
     api,
 ], error => {
     if (error) { throw error; }
