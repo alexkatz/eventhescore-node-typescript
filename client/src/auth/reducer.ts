@@ -1,5 +1,7 @@
 import { AnyAction } from "redux";
 import { User } from "./models";
+import { actionType, AuthAction } from "./action";
+import { Action } from "redux";
 
 export interface AuthState {
     user?: User;
@@ -13,6 +15,16 @@ const initialState: AuthState = {
     isRehydrated: false,
 }
 
-export const reducer = (state: AuthState = initialState, action: AnyAction): AuthState => {
-    return initialState;
+export const reducer = (state: AuthState = initialState, action: AuthAction & Action): AuthState => {
+    switch (action.type) {
+        case actionType.AUTHENTICATE: {
+            const { user } = action;
+            return {
+                ...state,
+                user,
+            };
+        }
+        default:
+            return state;
+    }
 }

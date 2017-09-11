@@ -87,6 +87,7 @@ class Login extends React.Component<LoginProps, LoginState> {
         const { authenticate } = this.props;
         this.setState({ isLoggingIn: true });
         await authenticate(response);
+        debugger;
         this.setState({ isLoggingIn: false });
     }
 

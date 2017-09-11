@@ -1,23 +1,25 @@
 import { ThunkAction } from 'redux-thunk';
 import { State } from '../store/state';
-import { AuthData } from "./models";
+import { AuthData, User } from "./models";
 import { client } from '../shared/client';
+import { Action } from 'redux';
+import { Thunk } from '../shared/utilities';
 
 export enum actionType {
     AUTHENTICATE = 'auth/AUTHENTICATE',
-    AUTHENTICATE_FAILURE = 'auth/AUTHENTICATE_FAILURE',
-    AUTHENTICATE_SUCCESS = 'auth/AUTHENTICATE_SUCCESS',
 }
 
-export interface AuthAction {
-
+export interface AuthAction extends Action {
+    user?: User;
 }
 
-export const authenticate = (authData: AuthData): ThunkAction<Promise<void>, State, void> =>
+export const authenticate = (authData: AuthData): Thunk<AuthAction, Promise<void>> =>
     async dispatch => {
         try {
-            const response = await client.post('/auth', authData);
+            const user: User = await client.post('/auth', authData);
+            dispatch({ type: actionType.AUTHENTICATE, user });
         } catch (error) {
             console.log(error);
+            return null;
         }
     }
