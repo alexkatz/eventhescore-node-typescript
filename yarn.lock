@@ -40,7 +40,7 @@
     "@types/podium" "*"
     "@types/shot" "*"
 
-"@types/inert@^4.2.2":
+"@types/inert@^4.2.3":
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/@types/inert/-/inert-4.2.3.tgz#995a28fd1ba9dc93a0aafdb7f06c44cf2cd71e12"
   dependencies:

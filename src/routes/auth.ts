@@ -8,24 +8,24 @@ const get = async url => {
     const response = await fetch(url);
     if (!response.ok) { return null; }
     return response.json();
-}
+};
 
 const authenticateFacebook = async ({ accessToken, user }) => {
-    const response = await get(`https://graph.facebook.com/me?access_token=${accessToken}`)
-    return response.id && response.name && user
-}
+    const response = await get(`https://graph.facebook.com/me?access_token=${accessToken}`);
+    return response.id && response.name && user;
+};
 
 const authenticateGoogle = async ({ accessToken, user }) => {
-    const result = await get(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${accessToken}`)
-    return result.email_verified === 'true' && parseInt(result.expires_in, 10) > 0 ? user : null
-}
+    const result = await get(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${accessToken}`);
+    return result.email_verified === 'true' && parseInt(result.expires_in, 10) > 0 ? user : null;
+};
 
 const authenticatePayload = async payload => {
-    const { user: { authPlatform } } = payload
+    const { user: { authPlatform } } = payload;
     return authPlatform === 'facebook'
         ? await authenticateFacebook(payload)
-        : await authenticateGoogle(payload)
-}
+        : await authenticateGoogle(payload);
+};
 
 const auth: RouteConfiguration[] = [
     {
@@ -45,7 +45,7 @@ const auth: RouteConfiguration[] = [
                 const response: User = {
                     id,
                     ...user,
-                }
+                };
                 reply(response);
             } catch (error) {
                 console.log(error);
