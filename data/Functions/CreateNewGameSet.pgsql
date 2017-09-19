@@ -18,6 +18,6 @@ END $$
 CREATE OR REPLACE FUNCTION createNewGameSet(GameTypeId INT) RETURNS INT AS $$
     DECLARE NewGameSetId INTEGER;
     BEGIN
-    INSERT INTO GameSet (GameTypeId, GameSetName, StartDt) VALUES (GameTypeId, GameSetId, GameName) RETURNING GameId INTO [STRICT] NewGameId;
+    INSERT INTO GameSet (GameTypeId, GameSetName, StartDt) VALUES (GameTypeId, GameSetId, GameName) RETURNING GameSetId INTO NewGameSetId;
     END
     $$ LANGUAGE plpgsql;
