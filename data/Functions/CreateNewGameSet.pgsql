@@ -15,7 +15,7 @@ END $$
 */
 
 
-CREATE OR REPLACE FUNCTION createNewGameSet(GameTypeId INT) RETURNS INT AS $$
+CREATE OR REPLACE FUNCTION ets.createNewGameSet(GameTypeId INT) RETURNS INT AS $$
     DECLARE NewGameSetId INTEGER;
     BEGIN
     INSERT INTO GameSet (GameTypeId, GameSetName, StartDt) VALUES (GameTypeId, GameSetId, GameName) RETURNING GameId INTO [STRICT] NewGameId;
