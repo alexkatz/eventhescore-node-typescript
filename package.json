@@ -10,14 +10,19 @@
     "clear": "rm -r dist",
     "lint-fix": "tslint -c tslint.json -p tsconfig.json --type-check --fix",
     "lint": "tslint -c tslint.json -p tsconfig.json --type-check --format codeFrame --force",
-    "watch": "tsc-watch --project tsconfig.json --onSuccess \"yarn lint\""
+    "watch": "tsc-watch --project tsconfig.json --onSuccess \"yarn on-tsc-success\"",
+    "on-tsc-success": "yarn lint && yarn update-models",
+    "update-models": "cp -a ./src/models/. ./client/src/models/"
   },
   "devDependencies": {
     "@types/boom": "^4.3.5",
-    "@types/hapi": "^16.1.7",
-    "@types/inert": "^4.2.2",
+    "@types/dotenv": "^4.0.1",
+    "@types/hapi": "^16.1.9",
+    "@types/hapi-auth-jwt2": "^7.0.5",
+    "@types/inert": "^4.2.3",
     "@types/isomorphic-fetch": "^0.0.34",
-    "@types/pg": "^6.1.43",
+    "@types/jsonwebtoken": "^7.2.3",
+    "@types/pg": "^7.1.0",
     "@types/redux": "^3.6.0",
     "tsc": "^1.20150623.0",
     "tsc-watch": "1.0.7",
@@ -26,10 +31,13 @@
   },
   "dependencies": {
     "boom": "^5.2.0",
-    "hapi": "^16.5.0",
+    "dotenv": "^4.0.0",
+    "hapi": "^16.6.0",
+    "hapi-auth-jwt2": "^7.3.0",
     "hapi-require-https": "^2.1.0",
     "inert": "^4.2.1",
     "isomorphic-fetch": "^2.2.1",
+    "jsonwebtoken": "^8.0.1",
     "pg": "^7.0.2"
   }
 }

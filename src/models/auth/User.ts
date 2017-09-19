@@ -1,14 +1,12 @@
+import { Platform } from './Platform';
+
 export interface User {
     id?: number;
+    username?: string;
     firstName: string;
     lastName: string;
     email: string;
     imageUrl: string;
     apiToken?: string;
-    authPlatform: string;
-}
-
-export interface AuthData {
-    accessToken: string;
-    user: User;
+    authPlatform: Platform;
 }

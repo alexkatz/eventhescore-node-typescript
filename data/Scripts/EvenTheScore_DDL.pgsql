@@ -15,9 +15,9 @@ SET search_path TO ets;
  DROP TABLE game_User_Join;
  DROP TABLE UserHighScore;
 
-
-
 -- Create base tables
+
+
 
 CREATE TABLE game (gameId SERIAL, gameTypeId INT NOT NULL, gameSetId INT, gameName VARCHAR(128), StartDt TIMESTAMP WITH TIME ZONE NOT NULL, EndDt TIMESTAMP WITH TIME ZONE);
 CREATE TABLE gameSet (gameSetId SERIAL, gameTypeId INT NOT NULL, gameSetName VARCHAR(128), StartDt TIMESTAMP WITH TIME ZONE NOT NULL, EndDt TIMESTAMP WITH TIME ZONE);

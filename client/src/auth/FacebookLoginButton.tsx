@@ -3,7 +3,7 @@ import { Constants } from "../shared/constants";
 import { Colors } from "../shared/colors";
 import { Assets } from "../shared/assets";
 import { Button } from "../shared/components/Button";
-import { AuthData } from './models';
+import { AuthPayload } from '../models/auth/AuthPayload';
 
 declare global {
   interface Window {
@@ -13,7 +13,7 @@ declare global {
 
 interface FacebookLoginButtonProps {
   appId: string;
-  onAuthenticate: (props: AuthData) => void;
+  onAuthenticate: (authPayload: AuthPayload) => void;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   style?: React.CSSProperties;

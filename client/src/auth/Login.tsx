@@ -2,10 +2,10 @@ import * as React from 'react';
 import { FacebookLoginButton } from "./FacebookLoginButton";
 import { Constants } from '../shared/constants';
 import { GoogleLoginButton } from "./GoogleLoginButton";
-import { AuthData } from './models';
 import { authenticate } from './action';
 import { connect } from 'react-redux';
 import { wrap } from '../shared/utilities';
+import { AuthPayload } from '../models/auth/AuthPayload';
 
 const BUTTON_PADDING = 20;
 
@@ -83,14 +83,12 @@ class Login extends React.Component<LoginProps, LoginState> {
         );
     }
 
-    private onAuthenticate = async (response: AuthData) => {
+    private onAuthenticate = async (authPayload: AuthPayload) => {
         const { authenticate } = this.props;
         this.setState({ isLoggingIn: true });
-        await authenticate(response);
-        debugger;
+        await authenticate(authPayload);
         this.setState({ isLoggingIn: false });
     }
-
 }
 
 const wrapped: React.ComponentType<LoginProps> = wrap(Login, [
