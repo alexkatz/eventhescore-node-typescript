@@ -5,7 +5,7 @@ select * from loginUser('ethan.dubois@outlook.com', 'Ethan', 'DuBois', 'asdfasdf
 */
 
 
-CREATE OR REPLACE FUNCTION ets.loginUser(NewEmail VARCHAR(500), NewUserName VARCHAR(128), NewFirstName VARCHAR(128), NewLastName VARCHAR(128), NewImageUrl VARCHAR(500), NewAuthPlatform VARCHAR(128)) RETURNS SETOF ets.User AS $$
+CREATE OR REPLACE FUNCTION ets.loginUser(NewEmail VARCHAR(500), NewFirstName VARCHAR(128), NewLastName VARCHAR(128), NewImageUrl VARCHAR(500), NewAuthPlatform VARCHAR(128)) RETURNS SETOF ets.User AS $$
     DECLARE CurrentUser ets.User%rowtype;
     DECLARE CurrentUserId INTEGER = -1;
     BEGIN
@@ -13,7 +13,7 @@ CREATE OR REPLACE FUNCTION ets.loginUser(NewEmail VARCHAR(500), NewUserName VARC
         --RAISE NOTICE 'CurrentUserId: %', CurrentUserId;
         IF CurrentUserId IS NULL
         THEN
-            SELECT * INTO CurrentUserId FROM createNewUser(NewEmail, NewUserName, NewFirstName, NewLastName, NewImageUrl, NewAuthPlatform);
+            SELECT * INTO CurrentUserId FROM createNewUser(NewEmail, '', NewFirstName, NewLastName, NewImageUrl, NewAuthPlatform);
         END IF;
         SELECT * INTO CurrentUser FROM ets.User WHERE UserId = CurrentUserID;
         RETURN NEXT CurrentUser;
