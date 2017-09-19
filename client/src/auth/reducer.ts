@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
-import { User } from "./models";
 import { actionType, AuthAction } from "./action";
 import { Action } from "redux";
+import { User } from "../models/auth/User";
 
 export interface AuthState {
     user?: User;

@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Constants } from '../shared/constants';
 import { Assets } from "../shared/assets";
 import { Button } from "../shared/components/Button";
-import { AuthData } from './models';
+import { AuthPayload } from '../models/auth/AuthPayload';
 
 const GOOGLE_SIGN_IN_COLOR = 'rgba(0, 0, 0, 0.54)';
 
 interface GoogleLoginButtonProps {
-    onAuthenticate: (props: AuthData) => void;
+    onAuthenticate: (authPayload: AuthPayload) => void;
     clientId: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
     disabled?: boolean;
