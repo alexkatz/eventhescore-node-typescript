@@ -3,9 +3,11 @@
 DROP FUNCTION IF EXISTS ets.createNewGame(GameTypeId INT, GameSetId INT, GameName VARCHAR(128));
 DROP FUNCTION IF EXISTS ets.createNewGameSet(GameTypeId INT);
 DROP FUNCTION IF EXISTS ets.createNewUser(Email VARCHAR(500), FirstName VARCHAR(128), LastName VARCHAR(128), ImageUrl VARCHAR(500), authPlatform VARCHAR(128));
-DROP FUNCTION IF EXISTS ets.loginUser(NewEmail VARCHAR(500), NewFirstName VARCHAR(128), NewLastName VARCHAR(128), NewImageUrl VARCHAR(500), NewAuthPlatform VARCHAR(128));
+DROP FUNCTION IF EXISTS ets.loginUser(NewEmail VARCHAR(500), NewUserName VARCHAR(128), NewFirstName VARCHAR(128), NewLastName VARCHAR(128), NewImageUrl VARCHAR(500), NewAuthPlatform VARCHAR(128));
 DROP FUNCTION IF EXISTS ets.userNameExists(UserName VARCHAR(128));
 DROP FUNCTION IF EXISTS ets.updateUserName(CurrentUserId INT, NewUserName VARCHAR(128));
+DROP FUNCTION IF EXISTS ets.addUserToGame(GameID INT, UserId INT);
+
 DROP TABLE IF EXISTS ets.gameAttribute CASCADE;
 DROP TABLE IF EXISTS ets.UserHighScore CASCADE;
 DROP TABLE IF EXISTS ets.game_User_Join CASCADE;
@@ -15,7 +17,7 @@ DROP TABLE IF EXISTS ets.gameType CASCADE;
 DROP TABLE IF EXISTS ets.gameTypeConfig CASCADE;
 DROP TABLE IF EXISTS ets.game CASCADE;
 
-DROP SCHEMA IF EXISTS ets CASCADE;
+DROP SCHEMA IF EXISTS ets;
 
 -- CREATE SCHEMA
 
@@ -53,7 +55,7 @@ CREATE OR REPLACE FUNCTION ets.createNewGame(GameTypeId INT, GameSetId INT, Game
 CREATE OR REPLACE FUNCTION ets.createNewGameSet(GameTypeId INT) RETURNS INT AS $$
     DECLARE NewGameSetId INTEGER;
     BEGIN
-        INSERT INTO GameSet (GameTypeId, GameSetName, StartDt) VALUES (GameTypeId, GameSetId, GameName) RETURNING GameId INTO NewGameId;
+    INSERT INTO GameSet (GameTypeId, GameSetName, StartDt) VALUES (GameTypeId, GameSetId, GameName) RETURNING GameSetId INTO NewGameSetId;
     END
     $$ LANGUAGE plpgsql;
 
@@ -79,10 +81,6 @@ CREATE OR REPLACE FUNCTION ets.loginUser(NewEmail VARCHAR(500), NewUserName VARC
         RETURN NEXT CurrentUser;
     END
     $$ LANGUAGE plpgsql;
-
-CREATE FUNCTION ets.testprocedure() RETURNS TABLE(name character varying) AS $$            
-    SELECT GameName FROM ets.Game;        
-    $$ LANGUAGE sql;
 
 CREATE OR REPLACE FUNCTION ets.updateUserName(CurrentUserId INT, NewUserName VARCHAR(128)) RETURNS SETOF ets.User AS $$
     DECLARE CurrentUser ets.User%rowtype;
