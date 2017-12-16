@@ -17,7 +17,7 @@ interface LoginProps {
     authenticate: typeof authenticate;
 }
 
-class Login extends React.Component<LoginProps, LoginState> {
+class LoginView extends React.Component<LoginProps, LoginState> {
     constructor(props: LoginProps) {
         super(props);
         this.state = {
@@ -27,6 +27,8 @@ class Login extends React.Component<LoginProps, LoginState> {
 
     public render() {
         const { isLoggingIn } = this.state;
+        const WIDTH = window.innerWidth;
+        const BUTTON_RATIO = 0.2;
         return (
             <div
                 style={{
@@ -91,7 +93,7 @@ class Login extends React.Component<LoginProps, LoginState> {
     }
 }
 
-const wrapped: React.ComponentType<LoginProps> = wrap(Login, [
+const wrapped: React.ComponentType<LoginProps> = wrap(LoginView, [
     connect(
         null,
         {
@@ -100,4 +102,4 @@ const wrapped: React.ComponentType<LoginProps> = wrap(Login, [
     ),
 ]);
 
-export { wrapped as Login };
+export { wrapped as LoginView };

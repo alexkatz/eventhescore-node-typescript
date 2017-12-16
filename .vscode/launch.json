@@ -10,10 +10,6 @@
             "name": "Launch Program",
             "program": "${workspaceRoot}/src/server.ts",
             "cwd": "${workspaceRoot}/src",
-            "runtimeArgs": [
-                "-r",
-                "dotenv/config"
-            ],
             "outFiles": [
                 "${workspaceRoot}/dist/**/*.js"
             ]

@@ -39,18 +39,16 @@ const auth: RouteConfiguration[] = [
             try {
                 const { payload: authData }: { payload: AuthPayload } = request;
                 const { user, user: { email, firstName, lastName, imageUrl, authPlatform }, accessToken } = authData;
-                const { rows: [{ id }] } = await client.query(
-                    'SELECT loginUser AS id FROM loginUser($1, $2, $3, $4, $5)',
+                const { rows: [{ user }] } = await client.query(
+                    'SELECT loginUser AS user FROM ets.loginUser($1, $2, $3, $4, $5)',
                     [email, firstName, lastName, imageUrl, authPlatform],
                 ); // TODO: no magic query strings, organize stored proc calls somehow...
                 const success = await authenticate(authPlatform, accessToken);
-                console.log('success', success);
                 if (!success) { throw Error(`platform ${authPlatform} could not authenticate user ${id}`); }
-                const token = jwt.sign(user, 'notreal');
                 reply({
                     id,
                     ...user,
-                    apiToken: token,
+                    apiToken: jwt.sign(user, process.env.SECRET_KEY),
                 } as User);
             } catch (error) {
                 console.log(error);

@@ -13,7 +13,7 @@ CREATE OR REPLACE FUNCTION ets.loginUser(NewEmail VARCHAR(500), NewFirstName VAR
         --RAISE NOTICE 'CurrentUserId: %', CurrentUserId;
         IF CurrentUserId IS NULL
         THEN
-            SELECT * INTO CurrentUserId FROM createNewUser(NewEmail, '', NewFirstName, NewLastName, NewImageUrl, NewAuthPlatform);
+            SELECT * INTO CurrentUserId FROM ets.createNewUser(NewEmail, NewFirstName, NewLastName, NewImageUrl, NewAuthPlatform);
         END IF;
         SELECT * INTO CurrentUser FROM ets.User WHERE UserId = CurrentUserID;
         RETURN NEXT CurrentUser;

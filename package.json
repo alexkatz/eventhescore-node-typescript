@@ -11,7 +11,7 @@
     "lint-fix": "tslint -c tslint.json -p tsconfig.json --type-check --fix",
     "lint": "tslint -c tslint.json -p tsconfig.json --type-check --format codeFrame --force",
     "watch": "tsc-watch --project tsconfig.json --onSuccess \"yarn on-tsc-success\"",
-    "on-tsc-success": "yarn lint && yarn update-models",
+    "on-tsc-success": "yarn update-models ; yarn lint",
     "update-models": "cp -a ./src/models/. ./client/src/models/"
   },
   "devDependencies": {

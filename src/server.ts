@@ -2,9 +2,12 @@ import * as Hapi from 'hapi';
 import { api } from './api';
 import * as inert from 'inert';
 import * as auth from 'hapi-auth-jwt2';
+import * as path from 'path';
+
+require('dotenv').config({ path: '../.env', silient: true });
 
 const server = new Hapi.Server();
-server.connection({ port: 3000, host: 'localhost', routes: { cors: true } });
+server.connection({ port: process.env.PORT, host: 'localhost', routes: { cors: true } });
 server.register([
     inert as any,
     api,
@@ -12,9 +15,8 @@ server.register([
 ], error => {
     if (error) { throw error; }
     server.auth.strategy('jwt', 'jwt', {
-        key: 'notreal',
+        key: process.env.SECRET_KEY,
         validateFunc: (decoded, request, callback) => {
-            debugger;
             return callback(null, true);
         },
         verifyOptions: { algorithms: ['HS256'] },

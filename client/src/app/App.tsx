@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleRoot } from "radium";
 import { Switch, Route } from "react-router";
 import * as DevTools from '../devTools/DevTools';
-import { Login } from "../auth/Login";
+import { LoginView } from "../auth/LoginView";
 import { AppStyle } from "./AppStyle";
 
 
@@ -16,7 +16,7 @@ const App = () => (
     >
         <AppStyle />
         <Switch>
-            <Route path='/' exact component={Login} />
+            <Route path='/' exact component={LoginView} />
         </Switch>
         {DevTools && <DevTools />}
     </StyleRoot>

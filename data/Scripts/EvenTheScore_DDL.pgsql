@@ -1,12 +1,12 @@
 -- DROP OLD SHIT
 
-DROP FUNCTION IF EXISTS ets.createNewGame(GameTypeId INT, GameSetId INT, GameName VARCHAR(128));
-DROP FUNCTION IF EXISTS ets.createNewGameSet(GameTypeId INT);
-DROP FUNCTION IF EXISTS ets.createNewUser(Email VARCHAR(500), FirstName VARCHAR(128), LastName VARCHAR(128), ImageUrl VARCHAR(500), authPlatform VARCHAR(128));
-DROP FUNCTION IF EXISTS ets.loginUser(NewEmail VARCHAR(500), NewUserName VARCHAR(128), NewFirstName VARCHAR(128), NewLastName VARCHAR(128), NewImageUrl VARCHAR(500), NewAuthPlatform VARCHAR(128));
-DROP FUNCTION IF EXISTS ets.userNameExists(UserName VARCHAR(128));
-DROP FUNCTION IF EXISTS ets.updateUserName(CurrentUserId INT, NewUserName VARCHAR(128));
-DROP FUNCTION IF EXISTS ets.addUserToGame(GameID INT, UserId INT);
+DROP FUNCTION IF EXISTS ets.createNewGame(GameTypeId INT, GameSetId INT, GameName VARCHAR(128)) CASCADE;
+DROP FUNCTION IF EXISTS ets.createNewGameSet(GameTypeId INT) CASCADE;
+DROP FUNCTION IF EXISTS ets.createNewUser(Email VARCHAR(500), FirstName VARCHAR(128), LastName VARCHAR(128), ImageUrl VARCHAR(500), authPlatform VARCHAR(128)) CASCADE;
+DROP FUNCTION IF EXISTS ets.loginUser(NewEmail VARCHAR(500), NewFirstName VARCHAR(128), NewLastName VARCHAR(128), NewImageUrl VARCHAR(500), NewAuthPlatform VARCHAR(128)) CASCADE;
+DROP FUNCTION IF EXISTS ets.userNameExists(UserName VARCHAR(128)) CASCADE;
+DROP FUNCTION IF EXISTS ets.updateUserName(CurrentUserId INT, NewUserName VARCHAR(128)) CASCADE;
+DROP FUNCTION IF EXISTS ets.addUserToGame(GameID INT, UserId INT) CASCADE;
 
 DROP TABLE IF EXISTS ets.gameAttribute CASCADE;
 DROP TABLE IF EXISTS ets.UserHighScore CASCADE;
@@ -62,12 +62,12 @@ CREATE OR REPLACE FUNCTION ets.createNewGameSet(GameTypeId INT) RETURNS INT AS $
 CREATE OR REPLACE FUNCTION ets.createNewUser(Email VARCHAR(500), FirstName VARCHAR(128), LastName VARCHAR(128), ImageUrl VARCHAR(500), authPlatform VARCHAR(128)) RETURNS INT AS $$
     DECLARE NewUserId INTEGER;
     BEGIN
-        INSERT INTO ets.User (Email, FirstName, LastName, ImageUrl, authPlatform) VALUES (Email, FirstName, LastName, ImageUrl, authPlatform) RETURNING UserId INTO NewUserId;
-        RETURN NewUserId;
+    INSERT INTO ets.User (Email, FirstName, LastName, ImageUrl, authPlatform) VALUES (Email, FirstName, LastName, ImageUrl, authPlatform) RETURNING UserId INTO NewUserId;
+    RETURN NewUserId;
     END
     $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION ets.loginUser(NewEmail VARCHAR(500), NewUserName VARCHAR(128), NewFirstName VARCHAR(128), NewLastName VARCHAR(128), NewImageUrl VARCHAR(500), NewAuthPlatform VARCHAR(128)) RETURNS SETOF ets.User AS $$
+CREATE OR REPLACE FUNCTION ets.loginUser(NewEmail VARCHAR(500), NewFirstName VARCHAR(128), NewLastName VARCHAR(128), NewImageUrl VARCHAR(500), NewAuthPlatform VARCHAR(128)) RETURNS SETOF ets.User AS $$
     DECLARE CurrentUser ets.User%rowtype;
     DECLARE CurrentUserId INTEGER = -1;
     BEGIN
@@ -75,7 +75,7 @@ CREATE OR REPLACE FUNCTION ets.loginUser(NewEmail VARCHAR(500), NewUserName VARC
         --RAISE NOTICE 'CurrentUserId: %', CurrentUserId;
         IF CurrentUserId IS NULL
         THEN
-            SELECT * INTO CurrentUserId FROM createNewUser(NewEmail, NewUserName, NewFirstName, NewLastName, NewImageUrl, NewAuthPlatform);
+            SELECT * INTO CurrentUserId FROM ets.createNewUser(NewEmail, NewFirstName, NewLastName, NewImageUrl, NewAuthPlatform);
         END IF;
         SELECT * INTO CurrentUser FROM ets.User WHERE UserId = CurrentUserID;
         RETURN NEXT CurrentUser;
